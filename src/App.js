@@ -1,8 +1,9 @@
+import "./App.css";
 import { useState } from "react";
-import RenderPlayer from "./components/RenderPlyers";
+import Player from "./components/RenderPlyers";
 
 function App() {
-	const [inputPlayer, setPlayer] = useState("james");
+	const [inputPlayer, setPlayer] = useState("smart");
 	const [data, setData] = useState();
 
 	const options = {
@@ -27,7 +28,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<header className="App-header">NBA </header>
+			<header className="App-header">NBA player</header>
 			<div>
 				<input
 					type="text"
@@ -41,24 +42,29 @@ function App() {
 			<div>
 				<table className="players" border="0">
 					<caption>NBA player</caption>
+					<th>N</th>
+					<th>Name</th>
+					<th>Birth</th>
+					<th>College</th>
+					<th>Career</th>
+					<th>BIO</th>
+					{data &&
+						data.map((item, i) => {
+							return (
+								<Player
+									index={i + 1}
+									firstname={item.firstname}
+									lastname={item.lastname}
+									birth={item.birth.date}
+									country={item.birth.country}
+									college={item.college}
+									career={item.nba.start}
+									height={item.height.meters}
+									weight={item.weight.kilograms}
+								/>
+							);
+						})}
 				</table>
-
-				{data &&
-					data.map((item, i) => {
-						return (
-							<RenderPlayer
-								index={i + 1}
-								firstname={item.firstname}
-								lastname={item.lastname}
-								birth={item.birth.date}
-								country={item.birth.country}
-								college={item.college}
-								career={item.nba.start}
-								height={item.height.meters}
-								weight={item.weight.kilograms}
-							/>
-						);
-					})}
 			</div>
 		</div>
 	);

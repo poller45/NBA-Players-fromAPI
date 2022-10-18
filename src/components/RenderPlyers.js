@@ -1,4 +1,6 @@
-function Players({
+import "./Player.css";
+
+function Player({
 	index,
 	firstname,
 	lastname,
@@ -31,4 +33,4 @@ function Players({
 	);
 }
 
-export default Players;
+export default Player;
