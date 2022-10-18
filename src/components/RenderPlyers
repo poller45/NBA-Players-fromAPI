@@ -1,0 +1,34 @@
+function Players({
+	index,
+	firstname,
+	lastname,
+	birth,
+	country,
+	college,
+	career,
+	height,
+	weight,
+}) {
+	return (
+		<tr>
+			<td>{index}</td>
+			<td>
+				{firstname} {lastname}
+			</td>
+			<td>
+				{birth}
+				<br />
+				{country}
+			</td>
+			<td> {college}</td>
+			<td>Pro NBA carrer start at {career}</td>
+			<td>
+				Height: {height}
+				<br />
+				Weight: {weight}
+			</td>
+		</tr>
+	);
+}
+
+export default Players;

@@ -1,25 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import RenderPlayer from "./components/RenderPlyers";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+	const [inputPlayer, setPlayer] = useState("james");
+	const [data, setData] = useState();
 
+	const options = {
+		method: "GET",
+		headers: {
+			"X-RapidAPI-Key": "102c34f16emsh49301a8699168b1p1bfa04jsn772008b2300e",
+			"X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com",
+		},
+	};
+
+	const updatePlayer = () => {
+		fetch(
+			`https://api-nba-v1.p.rapidapi.com/players?search=${inputPlayer}`,
+			options
+		)
+			.then((el) => el.json())
+			.then((data) => {
+				setData(data.response);
+			})
+			.catch((err) => console.error(err));
+	};
+
+	return (
+		<div className="App">
+			<header className="App-header">NBA </header>
+			<div>
+				<input
+					type="text"
+					value={inputPlayer}
+					onChange={(event) => setPlayer(event.target.value)}
+				/>
+				<button type="button" onClick={updatePlayer}>
+					Serch player
+				</button>
+			</div>
+			<div>
+				<table className="players" border="0">
+					<caption>NBA player</caption>
+				</table>
+
+				{data &&
+					data.map((item, i) => {
+						return (
+							<RenderPlayer
+								index={i + 1}
+								firstname={item.firstname}
+								lastname={item.lastname}
+								birth={item.birth.date}
+								country={item.birth.country}
+								college={item.college}
+								career={item.nba.start}
+								height={item.height.meters}
+								weight={item.weight.kilograms}
+							/>
+						);
+					})}
+			</div>
+		</div>
+	);
+}
 export default App;
