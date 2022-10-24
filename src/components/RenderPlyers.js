@@ -12,7 +12,7 @@ function Player({
 	weight,
 }) {
 	return (
-		<tr>
+		<tr key={firstname}>
 			<td>{index}</td>
 			<td>
 				{firstname} {lastname}

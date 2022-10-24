@@ -28,7 +28,7 @@ input {
    top: 4px;
 }
 table {
-   width: 100%;
+   width: 150%;
    margin-bottom: 20px;
    border: 5px solid #fff;
    border-top: 5px solid #fff;
@@ -41,4 +41,24 @@ table {
 
 .App-header{
    font-weight: bold;
+}
+
+style.equal-width td {
+   width: 50%;
+}
+
+.link{
+   
+   font-size: 20px;
+   font-weight: 400;
+   color: rgb(74, 4, 4);
+  
+}
+
+.link-main {
+   margin-right: 10%;
+   font-size: 20px;
+   font-weight: 400;
+   color: rgb(74, 4, 4);
+
 }

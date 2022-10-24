@@ -1,34 +1,25 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import About from "./components/About";
 import List from "./components/List";
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <List />,
-	},
-	{
-		path: "/info",
-		element: <About />,
-	},
-]);
 
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header">
-				<ul>
-					<li>NBA player</li>
-					<li>
-						<a href={`info`}>info</a>
-					</li>
-					<li>
-						<a href={`/`}>Main</a>
-					</li>
-				</ul>
-			</header>
-			<RouterProvider router={router} />
+			<BrowserRouter>
+				<Link to="/" className="link-main">
+					Main
+				</Link>
+				<Link to="/about" className="link">
+					About
+				</Link>
+				<Routes>
+					<Route path="/" element={<List />}></Route>
+					<Route path="/about" element={<About />}></Route>
+				</Routes>
+			</BrowserRouter>
 		</div>
 	);
 }
+
 export default App;
