@@ -1,40 +1,22 @@
 import { useState } from "react";
 import Player from "../components/RenderPlyers";
-//import usePlayer from "./usePlayer";
+import useAxiosRapidapiSearch from "./useAxiosRapidapi";
 
 function List() {
 	const [inputPlayer, setPlayer] = useState("");
-	const [data, setData] = useState();
-	const [error, setError] = useState(false);
 
-	const options = {
+	const { data, error, isloading } = useAxiosRapidapiSearch({
 		method: "GET",
-		headers: {
+		url: "https://api-nba-v1.p.rapidapi.com/players?search=" + inputPlayer,
+		headers: JSON.stringify({
 			"X-RapidAPI-Key": "102c34f16emsh49301a8699168b1p1bfa04jsn772008b2300e",
 			"X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com",
-		},
-	};
-
-	const updatePlayer = () => {
-		fetch(
-			`https://api-nba-v1.p.rapidapi.com/players?search=${inputPlayer}`,
-			options
-		)
-			.then((el) => el.json())
-			.then((data) => {
-				if (data.errors.length === 0) {
-					setData(data.response);
-					setError(false);
-				} else {
-					console.log("Error", data.errors.search);
-					setError(data.errors.search);
-				}
-			});
-	};
+		}),
+	});
 
 	return (
 		<>
-			<div className="App">
+			<div className="app">
 				<div>
 					<input
 						type="text"
@@ -42,12 +24,10 @@ function List() {
 						value={inputPlayer}
 						onChange={({ target: { value } }) => setPlayer(value)}
 					/>
-					<button type="button" onClick={updatePlayer}>
-						Serch player
-					</button>
+					<button>search</button>
 				</div>
 				<div>
-					{error && <div> {error} </div>}
+					{/* {error && <div style={{ textAlign: "center" }}> {error} </div>} */}
 					<table className="players" border="0">
 						<caption>NBA player </caption>
 						<thead>
@@ -61,6 +41,12 @@ function List() {
 							</tr>
 						</thead>
 						<tbody>
+							{isloading && (
+								<div style={{ textAlign: "center" }}>
+									{" "}
+									Start typing player name{" "}
+								</div>
+							)}
 							{!error &&
 								data &&
 								data.map((item, i) => {
