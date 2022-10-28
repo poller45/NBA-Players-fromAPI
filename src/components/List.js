@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Player from "../components/RenderPlyers";
-import useAxiosRapidapiSearch from "./useAxiosRapidapi";
+import useAxiosRapidapiSearch from "pavelchereacthook";
 
 function List() {
 	const [inputPlayer, setPlayer] = useState("");
